@@ -85,8 +85,7 @@ public class LatinIMESettings extends PreferenceActivity
                     .removePreference(mQuickFixes);
         }
         if (!LatinIME.VOICE_INSTALLED
-                || (Build.VERSION.SDK_INT < 8
-                        || !SpeechRecognizer.isRecognitionAvailable(this)) {
+                || !SpeechRecognizer.isRecognitionAvailable(this)) {
             getPreferenceScreen().removePreference(mVoicePreference);
         } else {
             updateVoiceModeSummary();
