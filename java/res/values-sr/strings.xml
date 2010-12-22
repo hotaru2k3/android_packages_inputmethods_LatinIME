@@ -19,9 +19,9 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Title for Latin keyboard  -->
-    <string name="english_ime_name">Андроидова тастатура</string>
+    <string name="english_ime_name">Гингербреадова тастатура</string>
     <!-- Title for Latin keyboard settings activity / dialog -->
-    <string name="english_ime_settings">Подешавања андроидове тастатуре</string>
+    <string name="english_ime_settings">Подешавања гингербреадове тастатуре</string>
 
     <!-- Option to provide vibrate/haptic feedback on keypress -->
     <string name="vibrate_on_keypress">Вибрације при притиску</string>

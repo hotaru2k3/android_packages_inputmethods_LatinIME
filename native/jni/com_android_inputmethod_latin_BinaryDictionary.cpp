@@ -159,7 +159,7 @@ static int registerNativeMethods(JNIEnv* env, const char* className,
 
 static int registerNatives(JNIEnv *env)
 {
-    const char* const kClassPathName = "com/android/inputmethod/latin/BinaryDictionary";
+    const char* const kClassPathName = "net/thinkindifferent/inputmethod/latin/BinaryDictionary";
     return registerNativeMethods(env,
             kClassPathName, gMethods, sizeof(gMethods) / sizeof(gMethods[0]));
 }
