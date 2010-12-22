@@ -2329,11 +2329,10 @@ public class LatinIME extends InputMethodService
     }
 
     private boolean shouldShowVoiceButton(FieldContext fieldContext, EditorInfo attribute) {
-        return ENABLE_VOICE_BUTTON && fieldCanDoVoice(fieldContext)
+        return VOICE_INSTALLED && ENABLE_VOICE_BUTTON && fieldCanDoVoice(fieldContext)
                 && !(attribute != null
                         && IME_OPTION_NO_MICROPHONE.equals(attribute.privateImeOptions))
-                && (Build.VERSION.SDK_INT < 8
-                        || SpeechRecognizer.isRecognitionAvailable(this);
+                && SpeechRecognizer.isRecognitionAvailable(this);
     }
 
     // receive ringer mode changes to detect silent mode
