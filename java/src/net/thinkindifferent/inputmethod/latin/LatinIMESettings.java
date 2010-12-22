@@ -24,6 +24,7 @@ import android.app.Dialog;
 import android.app.backup.BackupManager;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -84,7 +85,8 @@ public class LatinIMESettings extends PreferenceActivity
                     .removePreference(mQuickFixes);
         }
         if (!LatinIME.VOICE_INSTALLED
-                || !SpeechRecognizer.isRecognitionAvailable(this)) {
+                || (Build.VERSION.SDK_INT < 8
+                        || !SpeechRecognizer.isRecognitionAvailable(this)) {
             getPreferenceScreen().removePreference(mVoicePreference);
         } else {
             updateVoiceModeSummary();
@@ -100,7 +102,7 @@ public class LatinIMESettings extends PreferenceActivity
     }
 
     public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-        if (android.os.Build.VERSION.SDK_INT > 7) {
+        if (Build.VERSION.SDK_INT > 7) {
             (new BackupManager(this)).dataChanged();
         }
         // If turning on voice input, show dialog

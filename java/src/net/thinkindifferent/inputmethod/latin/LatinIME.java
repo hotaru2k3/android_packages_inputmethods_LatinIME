@@ -36,6 +36,7 @@ import android.content.res.XmlResourceParser;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.Keyboard;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
@@ -86,7 +87,7 @@ public class LatinIME extends InputMethodService
     private static final boolean PERF_DEBUG = false;
     static final boolean DEBUG = false;
     static final boolean TRACE = false;
-    static final boolean VOICE_INSTALLED = true;
+    static final boolean VOICE_INSTALLED = Build.Version.SDK_INT > 7;
     static final boolean ENABLE_VOICE_BUTTON = true;
 
     private static final String PREF_VIBRATE_ON = "vibrate_on";
@@ -2331,7 +2332,8 @@ public class LatinIME extends InputMethodService
         return ENABLE_VOICE_BUTTON && fieldCanDoVoice(fieldContext)
                 && !(attribute != null
                         && IME_OPTION_NO_MICROPHONE.equals(attribute.privateImeOptions))
-                && SpeechRecognizer.isRecognitionAvailable(this);
+                && (Build.VERSION.SDK_INT < 8
+                        || SpeechRecognizer.isRecognitionAvailable(this);
     }
 
     // receive ringer mode changes to detect silent mode
