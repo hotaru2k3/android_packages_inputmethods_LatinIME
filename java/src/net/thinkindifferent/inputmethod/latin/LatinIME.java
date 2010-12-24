@@ -43,6 +43,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.text.ClipboardManager;
 import android.text.TextUtils;
@@ -87,7 +88,7 @@ public class LatinIME extends InputMethodService
     private static final boolean PERF_DEBUG = false;
     static final boolean DEBUG = false;
     static final boolean TRACE = false;
-    static final boolean VOICE_INSTALLED = Build.Version.SDK_INT > 7
+    static final boolean VOICE_INSTALLED = Build.VERSION.SDK_INT > 7
         || getPackageManager().queryIntentActivities(
             new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0).size() != 0;
     static final boolean ENABLE_VOICE_BUTTON = true;
