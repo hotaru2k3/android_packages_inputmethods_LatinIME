@@ -88,9 +88,7 @@ public class LatinIME extends InputMethodService
     private static final boolean PERF_DEBUG = false;
     static final boolean DEBUG = false;
     static final boolean TRACE = false;
-    static final boolean VOICE_INSTALLED = Build.VERSION.SDK_INT > 7
-        || getPackageManager().queryIntentActivities(
-            new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH), 0).size() != 0;
+    static final boolean VOICE_INSTALLED = Build.VERSION.SDK_INT > 7;
     static final boolean ENABLE_VOICE_BUTTON = true;
 
     private static final String PREF_VIBRATE_ON = "vibrate_on";
@@ -1650,27 +1648,8 @@ public class LatinIME extends InputMethodService
             getCurrentInputEditorInfo(),
             mLanguageSwitcher.getInputLanguage(),
             mLanguageSwitcher.getEnabledLanguages());
-        if(Build.VERSION.SDK_INT > 7) {
-            mVoiceInput.startListening(context, swipe);
-        }
-        else {
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, R.string.voice_listening);
-            startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
-        }
+        mVoiceInput.startListening(context, swipe);
         switchToRecognitionStatusView();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
-            mVoiceResults.candidates = data.getStringArrayListExtra(
-                    RecognizerIntent.EXTRA_RESULTS);
-            mVoiceResults.alternatives = new Map<String, List<CharSequence>>();
-            mHandler.sendMessage(mHandler.obtainMessage(MSG_VOICE_RESULTS));
-        }
     }
 
     private void showVoiceWarningDialog(final boolean swipe) {
