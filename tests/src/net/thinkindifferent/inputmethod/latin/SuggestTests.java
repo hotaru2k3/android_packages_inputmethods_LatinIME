@@ -14,10 +14,10 @@
  * the License.
  */
 
-package com.android.inputmethod.latin;
+package net.thinkindifferent.inputmethod.latin;
 
 import android.test.AndroidTestCase;
-import com.android.inputmethod.latin.tests.R;
+import net.thinkindifferent.inputmethod.latin.tests.R;
 
 public class SuggestTests extends AndroidTestCase {
     private static final String TAG = "SuggestTests";

@@ -14,9 +14,9 @@
  * the License.
  */
 
-package com.android.inputmethod.latin;
+package net.thinkindifferent.inputmethod.latin;
 
-import com.android.inputmethod.latin.SwipeTracker.EventRingBuffer;
+import net.thinkindifferent.inputmethod.latin.SwipeTracker.EventRingBuffer;
 
 import android.test.AndroidTestCase;
 

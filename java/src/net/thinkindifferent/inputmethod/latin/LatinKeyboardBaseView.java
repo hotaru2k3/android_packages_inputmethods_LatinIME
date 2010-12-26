@@ -31,6 +31,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.Keyboard.Key;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -549,8 +550,13 @@ public class LatinKeyboardBaseView extends View implements PointerTracker.UIProx
         };
 
         final boolean ignoreMultitouch = true;
-        mGestureDetector = new GestureDetector(getContext(), listener, null, ignoreMultitouch);
-        mGestureDetector.setIsLongpressEnabled(false);
+        if (Build.VERSION.SDK_INT > 7) {
+            mGestureDetector = new GestureDetector(getContext(), listener, null, ignoreMultitouch);
+            mGestureDetector.setIsLongpressEnabled(false);
+        }
+        else {
+            mGestureDetector = null;
+        }
 
         mHasDistinctMultitouch = context.getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH_DISTINCT);
@@ -1308,7 +1314,7 @@ public class LatinKeyboardBaseView extends View implements PointerTracker.UIProx
         mSwipeTracker.addMovement(me);
 
         // We must disable gesture detector while mini-keyboard is on the screen.
-        if (mMiniKeyboard == null && mGestureDetector.onTouchEvent(me)) {
+        if (mMiniKeyboard == null && mGestureDetector != null && mGestureDetector.onTouchEvent(me)) {
             dismissKeyPreview();
             mHandler.cancelKeyTimers();
             return true;

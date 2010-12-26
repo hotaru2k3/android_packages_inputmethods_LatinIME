@@ -14,14 +14,14 @@
  * the License.
  */
 
-package com.android.inputmethod.latin;
+package net.thinkindifferent.inputmethod.latin;
 
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-import com.android.inputmethod.latin.Suggest;
-import com.android.inputmethod.latin.UserBigramDictionary;
-import com.android.inputmethod.latin.WordComposer;
+import net.thinkindifferent.inputmethod.latin.Suggest;
+import net.thinkindifferent.inputmethod.latin.UserBigramDictionary;
+import net.thinkindifferent.inputmethod.latin.WordComposer;
 
 import java.io.IOException;
 import java.io.InputStream;
