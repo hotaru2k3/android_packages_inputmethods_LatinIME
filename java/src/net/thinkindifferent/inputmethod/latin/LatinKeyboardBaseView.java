@@ -1301,7 +1301,9 @@ public class LatinKeyboardBaseView extends View implements PointerTracker.UIProx
     @Override
     public boolean onTouchEvent(MotionEvent me) {
         final int pointerCount = me.getPointerCount();
-        final int action = me.getActionMasked();
+        final int action = Build.VERSION.SDK_INT > 7 ?
+            me.getActionMasked() :
+            (me.getAction() & MotionEvent.ACTION_MASK);
 
         // TODO: cleanup this code into a multi-touch to single-touch event converter class?
         // If the device does not have distinct multi-touch support panel, ignore all multi-touch
@@ -1321,7 +1323,10 @@ public class LatinKeyboardBaseView extends View implements PointerTracker.UIProx
         }
 
         final long eventTime = me.getEventTime();
-        final int index = me.getActionIndex();
+        final int index = Build.VERSION.SDK_INT > 7 ?
+            me.getActionIndex() :
+            ((me.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >>
+                MotionEvent.ACTION_POINTER_INDEX_SHIFT);
         final int id = me.getPointerId(index);
         final int x = (int)me.getX(index);
         final int y = (int)me.getY(index);
