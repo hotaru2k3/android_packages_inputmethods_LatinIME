@@ -32,6 +32,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.text.TextPaint;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewConfiguration;
 import android.view.inputmethod.EditorInfo;
@@ -122,6 +123,13 @@ public class LatinKeyboard extends Keyboard {
     public LatinKeyboard(Context context, int xmlLayoutResId, int mode) {
         super(context, xmlLayoutResId, mode);
         final Resources res = context.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        float dpi = dm.density * DisplayMetrics.DENSITY_DEFAULT;
+        if(dm.xdpi != dpi || dm.ydpi != dpi) {
+            dm.xdpi = dpi;
+            dm.ydpi = dpi;
+            res.updateConfiguration(res.getConfiguration(), dm);
+        }
         mContext = context;
         mMode = mode;
         mRes = res;
