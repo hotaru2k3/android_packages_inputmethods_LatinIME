@@ -2382,13 +2382,17 @@ public class LatinIME extends InputMethodService
     }
 
     private void vibrate() {
+        int feedbackConstant = Build.VERSION.SDK_INT > 7 ?
+            HapticFeedbackConstants.KEYBOARD_TAP :
+            HapticFeedbackConstants.VIRTUAL_KEY;
         if (!mVibrateOn) {
             return;
         }
         if (mKeyboardSwitcher.getInputView() != null) {
             mKeyboardSwitcher.getInputView().performHapticFeedback(
-                    HapticFeedbackConstants.KEYBOARD_TAP,
-                    HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
+                    feedbackConstant,
+                    HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING &
+                    HapticFeedbackConstants.FLAG_IGNORE_VIEW_SETTING);
         }
     }
 
