@@ -128,7 +128,7 @@ public class LatinKeyboard extends Keyboard {
         if(dm.xdpi != dpi || dm.ydpi != dpi || dm.densityDpi != dpi) {
             dm.xdpi = dpi;
             dm.ydpi = dpi;
-            dm.densityDpi = dpi;
+            dm.densityDpi = dpi.intValue();
             res.updateConfiguration(res.getConfiguration(), dm);
         }
         mContext = context;
