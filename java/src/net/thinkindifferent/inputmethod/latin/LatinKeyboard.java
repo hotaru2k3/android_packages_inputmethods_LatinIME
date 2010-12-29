@@ -125,9 +125,10 @@ public class LatinKeyboard extends Keyboard {
         final Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         float dpi = dm.density * DisplayMetrics.DENSITY_DEFAULT;
-        if(dm.xdpi != dpi || dm.ydpi != dpi) {
+        if(dm.xdpi != dpi || dm.ydpi != dpi || dm.densityDpi != dpi) {
             dm.xdpi = dpi;
             dm.ydpi = dpi;
+            dm.densityDpi = dpi;
             res.updateConfiguration(res.getConfiguration(), dm);
         }
         mContext = context;
